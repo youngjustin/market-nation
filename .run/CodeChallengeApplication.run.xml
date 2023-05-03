@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="CodeChallengeApplication" type="Application" factoryName="Application">
+    <option name="ALTERNATIVE_JRE_PATH" value="20" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <option name="MAIN_CLASS_NAME" value="com.youngjustin.marketnation.codechallenge.CodeChallengeApplication" />
+    <module name="code-challenge.main" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
