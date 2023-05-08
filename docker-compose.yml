@@ -1,0 +1,24 @@
+version: "0.0.1"
+services:
+    web:
+        depends_on:
+            - rabbitmq
+            - mysql
+        build: .
+        ports:
+            - 8000:8000
+        links:
+            - rabbitmq
+            - mysql
+    rabbitmq:
+        image: "rabbitmq:3.11.15"
+        ports:
+            - 5672:5672
+    mysql:
+        image: "mysql:8.0.33"
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: example
+        ports:
+            - 3306:3306

@@ -12,7 +12,7 @@ spring:
 #        init:
 #            mode: always
     datasource:
-        url: jdbc:mysql://localhost:3306/numbers?createDatabaseIfNotExist=true
+        url: jdbc:mysql://mysql:3306/numbers?createDatabaseIfNotExist=true
         schema: public
         username: root
         password: password
@@ -27,7 +27,7 @@ spring:
 #        spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
     # Rabbit Message Queue properties
     rabbitmq:
-        host: localhost
+        host: rabbitmq
         port: 5672
         username: guest
         password: guest
@@ -47,4 +47,4 @@ queue:
 # Logging properties
 logging:
     level:
-        root: DEBUG
+        root: INFO

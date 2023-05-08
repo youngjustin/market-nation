@@ -10,6 +10,7 @@ Must set Gradle wrapper version in gradle-wrapper.properties to something newer 
 
 At any rate I'm setting Java compatibility in Gradle to 17 since this is all that the built-in Github actions supports at this time.
 See https://github.com/actions/setup-java
+(Otherwise we can customize Github to use a custom JDK that it can download and cache if we really want to use 20 on the runner.)
 
 Otherwise, you will see an error similar to
 
@@ -80,3 +81,9 @@ To get gradlew to work on command line, add to gradle.properties:
 (make sure path is correct for current installed version)
 or just use tasks within IntelliJ since gradle knows how to find toolchains in the IDE.
 
+### Docker
+
+Docker Composer is used to run this Java application, MySQL and RabbitMQ.
+
+After building this application (`./gradlew bootJar`), run the container with
+`docker compose up`

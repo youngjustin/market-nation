@@ -1,0 +1,25 @@
+spring:
+    # Data source properties
+    datasource:
+        url: jdbc:mysql://localhost:3306/numbers?createDatabaseIfNotExist=true
+    # Rabbit Message Queue properties
+    rabbitmq:
+        host: localhost
+        port: 5672
+
+# Scheduler properties
+scheduler:
+    # initial delay in milliseconds
+    delay: 0
+    # interval in milliseconds
+    interval: 10000
+
+queue:
+    name: my-queue
+    exchange: code-challenge
+    routing-key: numbers
+
+# Logging properties
+logging:
+    level:
+        root: DEBUG

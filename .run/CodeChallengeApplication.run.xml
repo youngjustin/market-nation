@@ -1,6 +1,9 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="CodeChallengeApplication" type="Application" factoryName="Application">
     <option name="ALTERNATIVE_JRE_PATH" value="/usr/local/Cellar/openjdk@17/17.0.7/libexec/openjdk.jdk/Contents/Home" />
+    <envs>
+      <env name="sprint.profiles.active" value="local" />
+    </envs>
     <option name="MAIN_CLASS_NAME" value="com.youngjustin.marketnation.codechallenge.CodeChallengeApplication" />
     <module name="code-challenge.main" />
     <method v="2">
