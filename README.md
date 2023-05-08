@@ -8,6 +8,8 @@ Project started from Spring Intializr (https://start.spring.io/) configured for 
 
 Must set Gradle wrapper version in gradle-wrapper.properties to something newer like 8.1.1 to get Java 20 support.. seems like Intializr missed this version requirement :)
 
+At any rate I'm setting Java compatibility in Gradle to 17 since this is all that the built-in Github actions supports at this time.
+
 Otherwise, you will see an error similar to
 
 `BUG! exception in phase 'semantic analysis' in source unit '_BuildScript_' Unsupported class file major version 64`
