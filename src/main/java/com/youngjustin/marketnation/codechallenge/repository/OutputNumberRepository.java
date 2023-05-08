@@ -4,8 +4,6 @@ import com.youngjustin.marketnation.codechallenge.entity.OutputNumberEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-/**
- * CRUD Repository for OutputNumberEntity.
- */
+/** CRUD Repository for OutputNumberEntity. */
 @Repository
 public interface OutputNumberRepository extends CrudRepository<OutputNumberEntity, Integer> {}

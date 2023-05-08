@@ -7,9 +7,7 @@ import com.youngjustin.marketnation.codechallenge.repository.InputNumberReposito
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * Runnable task that gets scheduled at initialization to persist and publish events.
- */
+/** Runnable task that gets scheduled at initialization to persist and publish events. */
 @Slf4j
 public class RandomNumberJob implements Runnable {
 
