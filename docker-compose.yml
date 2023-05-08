@@ -7,9 +7,6 @@ services:
         build: .
         ports:
             - 8000:8000
-        links:
-            - rabbitmq
-            - mysql
     rabbitmq:
         image: "rabbitmq:3.11.15"
         ports:
@@ -19,6 +16,6 @@ services:
         command: --default-authentication-plugin=mysql_native_password
         restart: always
         environment:
-            MYSQL_ROOT_PASSWORD: example
+            MYSQL_ROOT_PASSWORD: password
         ports:
             - 3306:3306
