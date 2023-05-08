@@ -12,7 +12,7 @@ version = '0.0.1'
 // If running from runner or command line, must specify Java Home path in org.gradle.java.home in gradle.properties
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(20)
+		languageVersion = JavaLanguageVersion.of(17)
 	}
 }
 
