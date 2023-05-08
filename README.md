@@ -34,6 +34,9 @@ Install OpenJDK 20 using Brew:
 Brew installs this into:
 `/usr/local/Cellar/openjdk`
 
+You should probably just install Java 17 since Github only supports 17.
+Then you don't have to keep changing the version to `languageVersion = JavaLanguageVersion.of(17)` in build.gradle before pushing.
+
 ### IntelliJ
 
 Install from https://www.jetbrains.com/idea/

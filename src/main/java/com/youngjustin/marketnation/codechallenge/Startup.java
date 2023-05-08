@@ -8,6 +8,9 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+/**
+ * Event listener that schedules a Runnable when Spring is done initializing.
+ */
 @Component
 @Slf4j
 public class Startup {
@@ -23,6 +26,18 @@ public class Startup {
       final Scheduler scheduler,
       final Runnable runnable,
       final SchedulerSettings schedulerSettings) {
+    if (scheduler == null) {
+      throw new IllegalArgumentException("scheduler is required");
+    }
+
+    if (runnable == null) {
+      throw new IllegalArgumentException("runnable is required");
+    }
+
+    if (schedulerSettings == null) {
+      throw new IllegalArgumentException("schedulerSettings is required");
+    }
+
     this.scheduler = scheduler;
     this.runnable = runnable;
     this.schedulerSettings = schedulerSettings;

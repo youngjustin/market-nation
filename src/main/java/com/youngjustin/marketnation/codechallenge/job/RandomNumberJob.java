@@ -7,6 +7,9 @@ import com.youngjustin.marketnation.codechallenge.repository.InputNumberReposito
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * Runnable task that gets scheduled at initialization to persist and publish events.
+ */
 @Slf4j
 public class RandomNumberJob implements Runnable {
 
@@ -21,6 +24,18 @@ public class RandomNumberJob implements Runnable {
       final RandomNumberSupplier randomNumberSupplier,
       final InputNumberRepository inputNumberRepository,
       final RabbitMQSender rabbitMQSender) {
+    if (randomNumberSupplier == null) {
+      throw new IllegalArgumentException("randomNumberSupplier is required");
+    }
+
+    if (inputNumberRepository == null) {
+      throw new IllegalArgumentException("inputNumberRepository is required");
+    }
+
+    if (rabbitMQSender == null) {
+      throw new IllegalArgumentException("rabbitMQSender is required");
+    }
+
     this.randomNumberSupplier = randomNumberSupplier;
     this.inputNumberRepository = inputNumberRepository;
     this.rabbitMQSender = rabbitMQSender;
