@@ -7,7 +7,17 @@ plugins {
 
 group = 'com.youngjustin.marketnation'
 version = '0.0.1'
-sourceCompatibility = '17'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(20)
+	}
+}
+
+// without this, googleJavaFormat task won't do anything
+googleJavaFormat {
+	toolVersion = "1.1"
+}
 
 configurations {
 	compileOnly {
@@ -46,3 +56,12 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+// enforce code formatting before compile
+build.dependsOn(tasks.googleJavaFormat)
+verifyGoogleJavaFormat.mustRunAfter(tasks.googleJavaFormat)
+
+//googleJavaFormat {
+//	source = sourceSets*.allJava
+//	include '**/*.java'
+//}

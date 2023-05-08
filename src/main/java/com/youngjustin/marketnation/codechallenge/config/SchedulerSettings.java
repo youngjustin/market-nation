@@ -2,7 +2,6 @@ package com.youngjustin.marketnation.codechallenge.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Data
@@ -10,8 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties("scheduler")
 public class SchedulerSettings {
 
-    private long delay;
+  private long delay;
 
-    private long interval;
-
+  private long interval;
 }

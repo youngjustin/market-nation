@@ -61,6 +61,9 @@ or
 
 This application uses Google Java Formatter (via the sherter Gradle plugin).
 
+For IntelliJ, see additional instructions to add VM options required for code parsing:
+https://github.com/google/google-java-format/blob/master/README.md#intellij-jre-config
+
 To format your code before check-in, run
 
 `./gradlew goJF`
@@ -68,3 +71,9 @@ To format your code before check-in, run
 The pipeline verifies code formatting by running
 
 `./gradlew verGJF`
+
+To get gradlew to work on command line, add to gradle.properties:
+`org.gradle.java.home=/usr/local/Cellar/openjdk/20.0.1/libexec/openjdk.jdk/Contents/Home`
+(make sure path is correct for current installed version)
+or just use tasks within IntelliJ since gradle knows how to find toolchains in the IDE.
+

@@ -12,28 +12,31 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class Startup {
 
-    private final Scheduler scheduler;
+  private final Scheduler scheduler;
 
-    private final Runnable runnable;
+  private final Runnable runnable;
 
-    private final SchedulerSettings schedulerSettings;
+  private final SchedulerSettings schedulerSettings;
 
-    @Autowired
-    public Startup(final Scheduler scheduler, final Runnable runnable, final SchedulerSettings schedulerSettings) {
-        this.scheduler = scheduler;
-        this.runnable = runnable;
-        this.schedulerSettings = schedulerSettings;
-    }
+  @Autowired
+  public Startup(
+      final Scheduler scheduler,
+      final Runnable runnable,
+      final SchedulerSettings schedulerSettings) {
+    this.scheduler = scheduler;
+    this.runnable = runnable;
+    this.schedulerSettings = schedulerSettings;
+  }
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void applicationReady() {
-        log.info("Application ready!");
+  @EventListener(ApplicationReadyEvent.class)
+  public void applicationReady() {
+    log.info("Application ready!");
 
-        this.startScheduler();
-    }
+    this.startScheduler();
+  }
 
-    private void startScheduler() {
-        this.scheduler.start(this.runnable, this.schedulerSettings.getDelay(), this.schedulerSettings.getInterval());
-    }
-
+  private void startScheduler() {
+    this.scheduler.start(
+        this.runnable, this.schedulerSettings.getDelay(), this.schedulerSettings.getInterval());
+  }
 }

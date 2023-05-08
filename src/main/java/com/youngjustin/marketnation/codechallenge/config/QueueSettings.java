@@ -9,10 +9,9 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties("queue")
 public class QueueSettings {
 
-    private String name;
+  private String name;
 
-    private String exchange;
+  private String exchange;
 
-    private String routingKey;
-
+  private String routingKey;
 }

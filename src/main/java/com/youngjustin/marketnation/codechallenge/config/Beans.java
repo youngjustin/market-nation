@@ -1,9 +1,9 @@
 package com.youngjustin.marketnation.codechallenge.config;
 
 import com.youngjustin.marketnation.codechallenge.generator.RandomNumberSupplier;
+import com.youngjustin.marketnation.codechallenge.job.RandomNumberJob;
 import com.youngjustin.marketnation.codechallenge.json.JacksonJsonSerde;
 import com.youngjustin.marketnation.codechallenge.json.JsonSerde;
-import com.youngjustin.marketnation.codechallenge.job.RandomNumberJob;
 import com.youngjustin.marketnation.codechallenge.queue.JMSListener;
 import com.youngjustin.marketnation.codechallenge.queue.RabbitMQSender;
 import com.youngjustin.marketnation.codechallenge.repository.InputNumberRepository;
@@ -26,60 +26,64 @@ import org.springframework.jms.annotation.EnableJms;
 @Slf4j
 public class Beans {
 
-    @Bean
-    public RandomNumberSupplier randomNumberSupplier() {
-        return new RandomNumberSupplier();
-    }
+  @Bean
+  public RandomNumberSupplier randomNumberSupplier() {
+    return new RandomNumberSupplier();
+  }
 
-    @Bean
-    public Scheduler scheduler() {
-        return new FixedRateScheduler();
-    }
+  @Bean
+  public Scheduler scheduler() {
+    return new FixedRateScheduler();
+  }
 
-    @Bean
-    public JsonSerde jsonSerde() {
-        return new JacksonJsonSerde();
-    }
+  @Bean
+  public JsonSerde jsonSerde() {
+    return new JacksonJsonSerde();
+  }
 
-    @Bean
-    @Autowired
-    public Runnable runnable(final RandomNumberSupplier randomNumberSupplier, final InputNumberRepository inputNumberRepository, final RabbitMQSender rabbitMQSender) {
-        return new RandomNumberJob(randomNumberSupplier, inputNumberRepository, rabbitMQSender);
-    }
+  @Bean
+  @Autowired
+  public Runnable runnable(
+      final RandomNumberSupplier randomNumberSupplier,
+      final InputNumberRepository inputNumberRepository,
+      final RabbitMQSender rabbitMQSender) {
+    return new RandomNumberJob(randomNumberSupplier, inputNumberRepository, rabbitMQSender);
+  }
 
-    @Bean
-    public MessageConverter jsonMessageConverter() {
-        return new Jackson2JsonMessageConverter();
-    }
+  @Bean
+  public MessageConverter jsonMessageConverter() {
+    return new Jackson2JsonMessageConverter();
+  }
 
-    @Bean
-    @Autowired
-    Queue queue(final QueueSettings queueSettings) {
-        return new Queue(queueSettings.getName(), false);
-    }
+  @Bean
+  @Autowired
+  Queue queue(final QueueSettings queueSettings) {
+    return new Queue(queueSettings.getName(), false);
+  }
 
-    @Bean
-    @Autowired
-    DirectExchange exchange(final QueueSettings queueSettings) {
-        return new DirectExchange(queueSettings.getExchange());
-    }
+  @Bean
+  @Autowired
+  DirectExchange exchange(final QueueSettings queueSettings) {
+    return new DirectExchange(queueSettings.getExchange());
+  }
 
-    @Bean
-    @Autowired
-    Binding binding(final QueueSettings queueSettings, final Queue queue, final DirectExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with(queueSettings.getRoutingKey());
-    }
+  @Bean
+  @Autowired
+  Binding binding(
+      final QueueSettings queueSettings, final Queue queue, final DirectExchange exchange) {
+    return BindingBuilder.bind(queue).to(exchange).with(queueSettings.getRoutingKey());
+  }
 
-//    @Bean
-//    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
-//        DefaultJmsListenerContainerFactory factory
-//                = new DefaultJmsListenerContainerFactory();
-//        factory.setConnectionFactory(new CachingConnectionFactory());
-//        return factory;
-//    }
+  //    @Bean
+  //    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
+  //        DefaultJmsListenerContainerFactory factory
+  //                = new DefaultJmsListenerContainerFactory();
+  //        factory.setConnectionFactory(new CachingConnectionFactory());
+  //        return factory;
+  //    }
 
-    @Bean
-    JMSListener jmsListener() {
-        return new JMSListener();
-    }
+  @Bean
+  JMSListener jmsListener() {
+    return new JMSListener();
+  }
 }

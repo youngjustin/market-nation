@@ -13,11 +13,10 @@ import lombok.Data;
 @Table(name = "input")
 public class InputNumberEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private int id;
 
-    @Column(nullable = false)
-    private long number;
-
+  @Column(nullable = false)
+  private long number;
 }

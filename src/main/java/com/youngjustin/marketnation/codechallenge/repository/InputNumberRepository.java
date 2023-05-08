@@ -5,5 +5,4 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface InputNumberRepository extends CrudRepository<InputNumberEntity, Integer> {
-}
+public interface InputNumberRepository extends CrudRepository<InputNumberEntity, Integer> {}
