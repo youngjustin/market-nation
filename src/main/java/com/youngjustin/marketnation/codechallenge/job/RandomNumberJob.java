@@ -1,4 +1,4 @@
-package com.youngjustin.marketnation.codechallenge.logic;
+package com.youngjustin.marketnation.codechallenge.job;
 
 import com.youngjustin.marketnation.codechallenge.entity.InputNumberEntity;
 import com.youngjustin.marketnation.codechallenge.generator.RandomNumberSupplier;
@@ -9,24 +9,22 @@ import com.youngjustin.marketnation.codechallenge.repository.InputNumberReposito
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.text.MessageFormat;
-
 @Slf4j
-public class JobLogic implements Runnable {
+public class RandomNumberJob implements Runnable {
 
-    final RandomNumberSupplier randomNumberSupplier;
+    private final RandomNumberSupplier randomNumberSupplier;
 
-    final InputNumberRepository inputNumberRepository;
+    private final InputNumberRepository inputNumberRepository;
 
-    final JsonSerde jsonSerde;
+    private final RabbitMQSender rabbitMQSender;
 
     @Autowired
-    RabbitMQSender rabbitMQSender;
-
-    public JobLogic(final RandomNumberSupplier randomNumberSupplier, final InputNumberRepository inputNumberRepository, final JsonSerde jsonSerde) {
+    public RandomNumberJob(final RandomNumberSupplier randomNumberSupplier,
+                           final InputNumberRepository inputNumberRepository,
+                           final RabbitMQSender rabbitMQSender) {
         this.randomNumberSupplier = randomNumberSupplier;
         this.inputNumberRepository = inputNumberRepository;
-        this.jsonSerde = jsonSerde;
+        this.rabbitMQSender = rabbitMQSender;
     }
 
     @Override
@@ -38,16 +36,9 @@ public class JobLogic implements Runnable {
         // prepare entity for saving to repository
         InputNumberEntity inputNumberEntity = new InputNumberEntity();
         inputNumberEntity.setNumber(number);
-        // and save it
-        this.inputNumberRepository.save(inputNumberEntity);
 
-        // serialize it to JSON
-        try {
-            String json = this.jsonSerde.serialize(inputNumberEntity);
-        }
-        catch (JsonSerializationException ex) {
-            throw new RuntimeException(ex);
-        }
+        // save it to the database
+        this.inputNumberRepository.save(inputNumberEntity);
 
         // submit it to the queue
         this.rabbitMQSender.send(inputNumberEntity);

@@ -9,6 +9,7 @@ Project started from Spring Intializr (https://start.spring.io/) configured for 
 Must set Gradle wrapper version in gradle-wrapper.properties to something newer like 8.1.1 to get Java 20 support.. seems like Intializr missed this version requirement :)
 
 At any rate I'm setting Java compatibility in Gradle to 17 since this is all that the built-in Github actions supports at this time.
+See https://github.com/actions/setup-java
 
 Otherwise, you will see an error similar to
 
@@ -54,4 +55,16 @@ Otherwise you will see an error similar to
 or
 `No matching variant of org.springframework.boot:spring-boot-gradle-plugin:3.0.6 was found. The consumer was configured to find a runtime of a library compatible with Java 11, packaged as a jar, and its dependencies declared externally, as well as attribute 'org.gradle.plugin.api-version' with value '7.6.1' but:`
 
+## Development
 
+### Code Formatting
+
+This application uses Google Java Formatter (via the sherter Gradle plugin).
+
+To format your code before check-in, run
+
+`./gradlew goJF`
+
+The pipeline verifies code formatting by running
+
+`./gradlew verGJF`
